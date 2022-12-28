@@ -26,7 +26,7 @@ public class ExplosionScript : MonoBehaviour
             rb = hit.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                print(hit.name);
+                rb.AddExplosionForce(power, posBomb, radius, 0.0f, ForceMode.Impulse);
             }
         }
     }

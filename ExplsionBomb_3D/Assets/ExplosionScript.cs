@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour 
 {
-    private float raio = 5.0f;
+    [SerializeField, Tooltip("Area de ação da explosão.")]
+    private float radius = 5.0f;
+    [SerializeField, Tooltip("Poder da explosão.")]
     private float power = 15.5f;
     private Vector3 posBomb;
     private Collider[] colliders;
@@ -13,12 +15,15 @@ public class ExplosionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
         posBomb = transform.position;
-        colliders = Physics.OverlapSphere(posBomb, raio);
+        colliders = Physics.OverlapSphere(posBomb, radius);
         foreach(Collider hit in colliders)
         {
-            print(hit.name);
+            rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                print(hit.name);
+            }
         }
     }
 
@@ -27,4 +32,6 @@ public class ExplosionScript : MonoBehaviour
     {
         
     }
+
+
 }

@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class ExplosionScript : MonoBehaviour 
 {
-    [SerializeField, Tooltip("Area de ação da explosão.")]
-    private float radius = 5.0f;
-    [SerializeField, Tooltip("Poder da explosão.")]
-    private float power = 15.5f;
+    [Tooltip("Area de ação da explosão.")]
+    public float radius = 5.0f;
+    [Tooltip("Cor para identificar area de alcance da bomba")]
+    public Color colorRadius;
+    [Tooltip("Poder da explosão.")]
+    public float power = 15.5f;
     private Vector3 posBomb;
+    [Tooltip("Cor para identificar onde está o centro da bomba")]
+    public Color colorPosBomb;
     private Collider[] colliders;
     private Rigidbody rb;
 
@@ -33,5 +37,11 @@ public class ExplosionScript : MonoBehaviour
         
     }
 
-
+    void OnDrawGizmos()
+    {
+        Gizmos.color = colorPosBomb;
+        Gizmos.DrawSphere(transform.position, 0.1f);
+        Gizmos.color = colorRadius;
+        Gizmos.DrawSphere(transform.position, radius);
+    }
 }

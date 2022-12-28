@@ -13,22 +13,15 @@ public class ExplosionScript : MonoBehaviour
     private Vector3 posBomb;
     [Tooltip("Cor para identificar onde está o centro da bomba")]
     public Color colorPosBomb;
+    [Tooltip("Ajuste na posição aparente da explosão para dar a impressão de levantar os objetos.")]
+    public float upwardForce;
     private Collider[] colliders;
     private Rigidbody rb;
 
     // Start is called before the first frame update
     void Start()
     {
-        posBomb = transform.position;
-        colliders = Physics.OverlapSphere(posBomb, radius);
-        foreach(Collider hit in colliders)
-        {
-            rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddExplosionForce(power, posBomb, radius, 0.0f, ForceMode.Impulse);
-            }
-        }
+        ExplosionEffect();
     }
 
     // Update is called once per frame
@@ -36,7 +29,19 @@ public class ExplosionScript : MonoBehaviour
     {
         
     }
-
+    void ExplosionEffect()
+    {
+        posBomb = transform.position;
+        colliders = Physics.OverlapSphere(posBomb, radius);
+        foreach (Collider hit in colliders)
+        {
+            rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(power, posBomb, radius, upwardForce, ForceMode.Impulse);
+            }
+        }
+    }
     void OnDrawGizmos()
     {
         Gizmos.color = colorPosBomb;

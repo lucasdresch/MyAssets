@@ -334,9 +334,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 1.3
   colorRadius: {r: 1, g: 0, b: 0, a: 0.27450982}
-  power: 15.5
+  power: 10
   colorPosBomb: {r: 1, g: 0, b: 0, a: 1}
-  upwardForce: 10
+  upwardForce: 0.25
 --- !u!4 &1423392638
 Transform:
   m_ObjectHideFlags: 0
